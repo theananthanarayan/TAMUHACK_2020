@@ -3,21 +3,37 @@ import numpy as np
 
 def ReadJSONFile(inFile):
     lines = inFile.readlines()
-    jsonData = []
+    flightsJSON = []
     for line in lines:
-        jsonObject = json.loads(line)
-        jsonData.append(jsonObject)
+        flightData = json.loads(line)
+        flightsJSON.append(flightData)
 
-    return jsonData
-	
+    return flightsJSON
+
+class FlightsDatabase:
+    def __init__(self, flightsJSON):
+	    self.flightsJSON = flightsJSON
+
+    def search(self, attr, key):
+        results = []
+        for flightData in self.flightsJSON:
+            if(flightData[attr] == key):
+                results.append(flightData)
+        return results
+
+
 def ConvertStringToDateTime(stringDate):
     dateTimeVal = datetime.strptime(stringDate, "%Y-%m-%dT%H-%M%S")
 
 if len(sys.argv) < 2:
     raise Exception("Not enough input arguments")
 	
-inFile = open(sys.argv[1], "rt")
+inFile = open("SouthwestFlights.json", "rt")
+flightNumber = sys.argv[1]
 
-jsonData = ReadJSONFile(inFile)
+flightsJSON = ReadJSONFile(inFile)
 
-print(jsonData)
+fdb = FlightsDatabase(flightsJSON)
+
+print(fdb.search("marketingFlightNumber", flightNumber))
+
