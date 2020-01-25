@@ -1,0 +1,14 @@
+/* Instead of having to copy css into every header, using a external css allows for defining the style of many HTML Pages
+
+   id Attributes allow characterization of a certain attribute
+*/
+
+.topLogoBox{
+    display: inline-block;
+    text-align: center;
+    height:15%;
+    width: 50%;
+    background-color:  #27a2d2;
+    box-shadow: 6px 8px #27a2d25b;
+    color: gainsboro;
+}
