@@ -1,4 +1,5 @@
 import string, sys, random, datetime, json
+import requests
 import numpy as np
 
 def ReadJSONFile(inFile):
@@ -21,9 +22,12 @@ class FlightsDatabase:
                 results.append(flightData)
         return results
 
-
-def ConvertStringToDateTime(stringDate):
-    dateTimeVal = datetime.strptime(stringDate, "%Y-%m-%dT%H-%M%S")
+    def findFirstAirportDestination(self, flightNumber):
+        results = self.search("marketingFlightNumber", flightNumber)
+        if len(results) > 0:
+            return results[0]["destinationAirportCode"]
+        else:
+            return None
 
 if len(sys.argv) < 2:
     raise Exception("Not enough input arguments")
@@ -35,5 +39,5 @@ flightsJSON = ReadJSONFile(inFile)
 
 fdb = FlightsDatabase(flightsJSON)
 
-print(fdb.search("marketingFlightNumber", flightNumber))
+print(fdb.findFirstAirportDestination(flightNumber))
 
