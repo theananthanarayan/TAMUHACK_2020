@@ -4,7 +4,6 @@
 */
 
 .topLogoBox{
-    
     display: inline-block;
     text-align: center;
     height:15%;
@@ -12,4 +11,12 @@
     background-color:  #27a2d2;
     box-shadow: 6px 8px #27a2d25b;
     color: gainsboro;
+}
+
+.outline {
+    background-color: #27a2d2;
+    text-align: center;
+    height: 30%;
+    widows: 50%;
+
 }
